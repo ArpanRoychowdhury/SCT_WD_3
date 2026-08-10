@@ -1,0 +1,410 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #061525,
+            #0A1D2D,
+            #102A3D
+        );
+
+    color: #fff;
+    text-align: center;
+}
+
+main {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    padding-top: 50px;
+}
+
+.game-title {
+    font-size: 3.4rem;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 38px;
+
+    color: #ffffff;
+
+    text-transform: uppercase;
+
+    text-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.35);
+
+    position: relative;
+}
+
+
+.title-x {
+    color: #00A8FF;
+
+    text-shadow:
+        0 0 5px rgba(0, 168, 255, 0.7),
+        0 0 12px rgba(0, 168, 255, 0.35);
+}
+
+
+.title-o {
+    color: #FF2D75;
+
+    text-shadow:
+        0 0 5px rgba(255, 45, 117, 0.7),
+        0 0 12px rgba(255, 45, 117, 0.35);
+}
+
+
+.game-title::after {
+    content: "";
+
+    display: block;
+
+    width: 280px;
+    height: 8px;
+
+    margin: 12px auto 0;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00A8FF,
+            #ffffff,
+            #FF2D75
+        );
+
+    box-shadow:
+        0 0 8px
+        rgba(255, 255, 255, 0.25);
+}
+
+
+.game-mode {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 18px;
+
+    margin-bottom: 35px;
+}
+
+
+.mode-btn {
+    padding: 16px 32px;
+
+    border: 2px solid rgba(150, 180, 210, 0.30);
+
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.06);
+
+    color: #ffffff;
+
+    font-size: 1.8rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+.mode-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+
+    transform: translateY(-2px);
+}
+
+.mode-btn.active {
+    background:
+        linear-gradient(
+            135deg,
+            #ff512f,
+            #e91e63
+        );
+
+    border-color: transparent;
+
+    box-shadow:
+        0 5px 15px
+        rgba(233, 30, 99, 0.35);
+}
+
+.container {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 30px;
+}
+
+.game {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 160px);
+    grid-template-rows: repeat(3, 160px);
+
+    gap: 20px;
+
+    background:
+        rgba(255, 255, 255, 0.07);
+
+    padding: 14px;
+
+    border-radius: 19px;
+
+    border:
+        1px solid rgba(150, 180, 210, 0.20);
+
+    box-shadow:
+        0 10px 35px
+        rgba(0, 0, 0, 0.35);
+
+    backdrop-filter: blur(12px);
+}
+
+
+.winning-line {
+    position: absolute;
+
+    height: 5px;
+
+    background: #4DFF9A;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 0 6px
+        rgba(77, 255, 154, 0.9),
+
+        0 0 14px
+        rgba(77, 255, 154, 0.7),
+
+        0 0 25px
+        rgba(77, 255, 154, 0.45);
+
+    transform-origin: left center;
+
+    display: none;
+
+    pointer-events: none;
+
+    z-index: 20;
+}
+
+
+.box {
+    width: 160px;
+    height: 160px;
+
+    border-radius: 16px;
+
+    border:
+        2px solid
+        rgba(150, 180, 210, 0.40);
+
+    background:
+        rgba(255, 255, 255, 0.05);
+
+    font-size: 5rem;
+
+    font-weight: bold;
+
+    color: #ffffff;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+
+.box:hover:not(:disabled) {
+    background:
+        rgba(255, 255, 255, 0.10);
+
+    cursor: pointer;
+
+    transform: scale(1.05);
+}
+
+
+.box:disabled {
+    cursor: not-allowed;
+}
+
+.box.x {
+    background: linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #66c7ff 18%,
+        #00a8ff 55%,
+        #0077d9 100%
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    text-shadow:
+        0 1px 1px rgba(255, 255, 255, 0.9),
+        0 0 4px rgba(0, 168, 255, 0.8),
+        0 0 9px rgba(0, 168, 255, 0.45);
+}
+
+
+.box.o {
+    background: linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #ff8fb5 18%,
+        #ff2d75 55%,
+        #d9004f 100%
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    text-shadow:
+        0 1px 1px rgba(255, 255, 255, 0.9),
+        0 0 4px rgba(255, 45, 117, 0.8),
+        0 0 9px rgba(255, 45, 117, 0.45);
+}
+
+.msg-container {
+    font-size: 3rem;
+
+    font-weight: bold;
+
+    min-height: 40px;
+}
+
+#msg {
+    color: #4DFF9A;
+
+    text-shadow:
+        0 0 8px
+        rgba(77, 255, 154, 0.5);
+}
+
+#reset-btn,
+#new-btn {
+    padding: 1rem 2.5rem;
+
+    font-size: 2.5rem;
+
+    font-weight: bold;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff512f,
+            #e91e63
+        );
+
+    border: none;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+
+    box-shadow:
+        0 5px 15px
+        rgba(233, 30, 99, 0.25);
+}
+
+#reset-btn:hover,
+#new-btn:hover {
+    transform: scale(1.05);
+
+    box-shadow:
+        0 8px 20px
+        rgba(233, 30, 99, 0.40);
+}
+
+.hide {
+    display: none !important;
+}
+
+@media (max-width: 700px) {
+
+    main {
+        padding-top: 25px;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    .game-mode {
+        gap: 8px;
+    }
+
+    .mode-btn {
+        padding: 10px 12px;
+
+        font-size: 0.85rem;
+    }
+
+    .game {
+        grid-template-columns:
+            repeat(3, 90px);
+
+        grid-template-rows:
+            repeat(3, 90px);
+
+        gap: 10px;
+
+        padding: 10px;
+    }
+
+    .box {
+        width: 90px;
+        height: 90px;
+
+        font-size: 2.8rem;
+    }
+      .msg-container {
+        font-size: 1.3rem;
+    }
+
+    #reset-btn,
+    #new-btn {
+        padding: 0.8rem 1.5rem;
+
+        font-size: 1rem;
+    }
+}
+}
